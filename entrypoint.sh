@@ -77,7 +77,7 @@ if [[ $exit_code == 0 ]]; then
     elif [[ $do_commit -eq 1 ]]; then
       echo
       echo "============================"
-      echo "Committing to Current Branch"
+      echo "Committing to current branch"
       echo "============================"
 
       git commit -a -m "$message_title" -m "$message_mod_files"
