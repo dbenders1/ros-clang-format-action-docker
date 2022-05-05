@@ -64,7 +64,6 @@ if [[ $exit_code == 0 ]]; then
 - $file"
     done
 
-    echo
     echo "$message_mod_files"
 
     if [[ $do_commit -eq 0 ]]; then
