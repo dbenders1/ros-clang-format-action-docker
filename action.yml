@@ -1,0 +1,31 @@
+name: 'ROS C++ formatter'
+author: Dennis Benders
+description: 'Formats *.h, *.hpp and *.cpp files according to the ROS C++ style, and commits and pushes the changes. Based on https://github.com/AutoModality/action-ros-clang-format'
+branding:
+  color: green
+  icon: check-square
+inputs:
+  check-only-or-commit:
+    description: 'Indicates whether the action should only check code style and fail if not compliant, or format, commit and push the changes'
+    required: false
+    default: 'check-only' #2 options: ['check-only', 'commit']
+  author-name:
+    description: 'The name that will appear in commits when changes need to be committed'
+    required: false
+    default: Format Bot
+  author-email:
+    description: 'The email address that will appear in commits when changes need to be committed'
+    required: false
+    default: formatter@github.bot
+  commit-message:
+    description: 'The commit message used when changes need to be committed'
+    required: false
+    default: 'Style: format *.h, *.hpp and *.cpp files according to ROS C++ style'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.author-name }}
+    - ${{ inputs.author-email }}
+    - ${{ inputs.commit-message }}
+    - ${{ inputs.check-only-or-commit }}
