@@ -1,6 +1,25 @@
 #!/bin/bash
 
+# Install Ubuntu packages
+apt-get update
+apt-get install -y clang-format-3.9 git
+
+# Function to apply clang-format
+# according to docs, the --style=file will find the .clang-file at the root placed by the Dockerfile copy
+# https://releases.llvm.org/10.0.0/tools/clang/docs/ClangFormat.html
+# Use -style=file to load style configuration from
+#                              .clang-format file located in one of the parent
+#                              directories of the source file (or current
+#                              directory for stdin).
+apply_style(){
+  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-3.9 -i -style=file $1
+}
+
 # Process script inputs
+echo
+echo "================================="
+echo "Processing action input arguments"
+echo "================================="
 name=$1
 email=$2
 message_title=$3
@@ -22,15 +41,6 @@ else
   exit 1
 fi
 
-# Install Ubuntu packages
-apt-get update
-apt-get install -y clang-format-3.9 git
-
-# Function to apply clang-format
-apply_style(){
-  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-3.9 -i -style=file $1
-}
-
 # Git configuration
 git config --global --add safe.directory /github/workspace
 git config --global user.name "$name"
@@ -38,12 +48,6 @@ git config --global user.email "$email"
 git config --global push.default current
 
 # Apply clang-format
-# according to docs, the --style=file will find the .clang-file at the root placed by the Dockerfile copy
-# https://releases.llvm.org/10.0.0/tools/clang/docs/ClangFormat.html
-# Use -style=file to load style configuration from
-#                              .clang-format file located in one of the parent
-#                              directories of the source file (or current
-#                              directory for stdin).
 echo
 echo "======================="
 echo "Applying style to files"
