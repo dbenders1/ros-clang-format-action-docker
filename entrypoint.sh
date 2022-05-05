@@ -55,7 +55,7 @@ apply_style
 modified_files=$(git diff --name-only | xargs)
 exit_code=$?
 
-# If last command was executed successfully (exit status 0): check modified files (do_commit=0) or commit and push modified files (if do_commit=1)
+# If last command was executed successfully (exit status 0): check modified files (do_commit=0) or commit and push modified files (do_commit=1)
 if [[ $exit_code == 0 ]]; then
   if [[ $modified_files ]]; then
     message_mod_files="Modified files:"
