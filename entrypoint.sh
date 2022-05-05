@@ -25,17 +25,14 @@ email=$2
 message_title=$3
 if [[ $4 == 'check-only' ]]; then
   do_commit=0
-  echo
   echo "Action input 'check-only-or-commit' set to 'check-only': formatting and failing in case code is not properly formatted"
 elif [[ $4 == 'commit' ]]; then
   do_commit=1
-  echo
   echo "Action input 'check-only-or-commit' set to 'commit': formatting and, if necessary, committing and pushing code to the repository with:
 - Author name: $name
 - Author email: $email
 - Commit message title: '$message_title'"
 else
-  echo
   echo "Action input 'check-only-or-commit' takes either of the following arguments: ['check-only', 'commit']!"
   echo "Exiting"
   exit 1
