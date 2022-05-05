@@ -28,7 +28,7 @@ apt-get install -y clang-format-3.9 git
 
 # Function to apply clang-format
 apply_style(){
-  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-3.9 -i -style=file --verbose $1
+  find . -name '*.h' -or -name '*.hpp' -or -name '*.cpp' | xargs clang-format-3.9 -i -style=file $1
 }
 
 # Git configuration
@@ -51,7 +51,7 @@ echo "======================="
 apply_style
 
 # Determine modified files using Git
-modified_files=$(sudo git diff --name-only | xargs)
+modified_files=$(git diff --name-only | xargs)
 exit_code=$?
 
 # If last command was executed successfully (exit status 0): check modified files (do_commit=0) or commit and push modified files (if do_commit=1)
