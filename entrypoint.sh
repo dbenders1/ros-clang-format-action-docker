@@ -32,10 +32,10 @@ apply_style(){
 }
 
 # Git configuration
-sudo git config --global --add safe.directory /github/workspace
-sudo git config --global user.name "$name"
-sudo git config --global user.email "$email"
-sudo git config --global push.default current
+git config --global --add safe.directory /github/workspace
+git config --global user.name "$name"
+git config --global user.email "$email"
+git config --global push.default current
 
 # Apply clang-format
 # according to docs, the --style=file will find the .clang-file at the root placed by the Dockerfile copy
@@ -80,8 +80,8 @@ if [[ $exit_code == 0 ]]; then
       echo "Committing to Current Branch"
       echo "============================"
 
-      sudo git commit -a -m "$message_title" -m "$message_mod_files"
-      sudo git push
+      git commit -a -m "$message_title" -m "$message_mod_files"
+      git push
     fi
 
   else
@@ -93,7 +93,7 @@ if [[ $exit_code == 0 ]]; then
 
 # If last command failed (exit status != 0): print error message and exit
 else
-  echo "Running command 'modified_files=\$(sudo git diff --name-only | xargs)' was not successful and exited with code $exit_code!"
+  echo "Running command 'modified_files=\$(git diff --name-only | xargs)' was not successful and exited with code $exit_code!"
   echo "Exiting"
   exit $exit_code
 fi
