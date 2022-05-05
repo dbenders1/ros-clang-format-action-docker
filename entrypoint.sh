@@ -85,7 +85,6 @@ if [[ $exit_code == 0 ]]; then
     fi
 
   else
-    echo
     echo "No modified files after formatting"
     echo "CHECK PASSED"
     exit 0
